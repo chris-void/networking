@@ -3,7 +3,7 @@
 # Echo server program
 import socket
 
-HOST = '128.197.11.36'                 # Symbolic name meaning the local host
+HOST = '128.197.11.36'    # Symbolic name meaning the local host
 PORT = 58909              # Arbitrary non-privileged port
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
