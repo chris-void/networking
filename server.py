@@ -22,3 +22,20 @@ while 1:
     conn.send(data)
 
 conn.close()
+
+# Connection Setup Phase
+
+## msg format:
+## <PROTOCOL PHASE><WS><MEASUREMENT TYPE><WS><NUMBER OF PROBES><WS><MESSAGE SIZE><WS><SERVER DELAY>\n
+msg1 = "'s' rtt <NUMBER OF PROBES> byte# <SERVER DELAY>\n" 
+msg2 = "'s' tput"
+
+# Measurement Phase
+
+## msg format:
+## <PROTOCOL PHASE><WS><MEASUREMENT TYPE><WS><NUMBER OF PROBES><WS><MESSAGE SIZE><WS><SERVER DELAY>\n
+
+# Connection Termination Phase
+
+## msg format:
+## <PROTOCOL PHASE>\n

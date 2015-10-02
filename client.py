@@ -19,7 +19,8 @@ print 'Received From Server:', repr(data)
 
 ## msg format:
 ## <PROTOCOL PHASE><WS><MEASUREMENT TYPE><WS><NUMBER OF PROBES><WS><MESSAGE SIZE><WS><SERVER DELAY>\n
-
+msg1 = "'s' rtt <NUMBER OF PROBES> byte# <SERVER DELAY>\n" 
+msg2 = "'s' tput"
 
 # Measurement Phase
 
