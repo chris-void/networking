@@ -4,7 +4,7 @@
 import socket
 import sys
 
-host = ''
+host = '128.197.11.36'
 backlog = 5
 
 from echoserver_worker import ServerWorker
@@ -16,7 +16,7 @@ class Server:
             port = int(sys.argv[1])
         except:
             print "Usage: Server.py Server_port"
-            port = 5000
+            port = 58909
             print "Choose default port (", port, ")"
 
 
