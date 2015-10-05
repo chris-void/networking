@@ -6,13 +6,15 @@ import socket
 HOST = '128.197.11.36'    # Symbolic name meaning the local host
 PORT = 58909              # Arbitrary non-privileged port
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.bind((HOST, PORT))
-s.listen(1)
+# create a server socket
+serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+# bind the socket to a port
+serversocket.bind((HOST, PORT))
+serversocket.listen(1) # ?
 
 print "Server Started"
 
-conn, addr = s.accept()
+conn, addr = serversocket.accept()
 print 'Connexcted by', addr
 
 while 1:
