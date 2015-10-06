@@ -6,6 +6,12 @@ import socket
 HOST = '128.197.11.36'    # Symbolic name meaning the local host
 PORT = 58909              # Arbitrary non-privileged port
 
+# Connection Setup Phase
+## parse the msg sent to log val
+## if valid then 200 OK: Ready else 404 ERROR: Invalid Connection Setup Message
+
+
+
 # create a server socket
 serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 # bind the socket to a port
@@ -16,6 +22,8 @@ print "Server Started"
 
 conn, addr = serversocket.accept()
 print 'Connexcted by', addr
+
+# 
 
 while 1:
     data = conn.recv(1024)

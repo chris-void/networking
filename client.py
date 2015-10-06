@@ -5,7 +5,9 @@ import socket
 HOST = '128.197.11.36'    # The remote host
 PORT = 58909          # The same port as used by the server
 
+##
 # Connection Setup Phase
+##
 def connectionsetup(self, measure_type, msg_size):
     def __init__(self):
         PROTOCOL_PHASE = 's'
@@ -30,20 +32,30 @@ s.close()
 print 'Received From Server:', repr(data)
 
 
+#
+# <PROTOCOL PHASE><WS><MEASUREMENT TYPE><WS><NUMBER OF PROBES><WS><MESSAGE SIZE><WS><SERVER DELAY>\n
+#msg1 = "'s' rtt <NUMBER OF PROBES> byte# <SERVER DELAY>\n" 
+#msg2 = "'s' tput"
 
 
-
-## <PROTOCOL PHASE><WS><MEASUREMENT TYPE><WS><NUMBER OF PROBES><WS><MESSAGE SIZE><WS><SERVER DELAY>\n
-msg1 = "'s' rtt <NUMBER OF PROBES> byte# <SERVER DELAY>\n" 
-msg2 = "'s' tput"
-
+# send probe msg to cal mean rtt and throughput
+## 
 # Measurement Phase
+##
 def measure(self):
-
+    def __init__(self):
+        PROTOCOL_PHASE = 'm'
+    
 ## msg format:
-## <PROTOCOL PHASE><WS><MEASUREMENT TYPE><WS><NUMBER OF PROBES><WS><MESSAGE SIZE><WS><SERVER DELAY>\n
+## <PROTOCOL PHASE>< ><MEASUREMENT TYPE>< ><NUMBER OF PROBES>< ><MESSAGE SIZE>< ><SERVER DELAY>\n
 
+
+
+##
 # Connection Termination Phase
+##
+def connectionterminate(self):
+    pass
 
 ## msg format:
 ## <PROTOCOL PHASE>\n
