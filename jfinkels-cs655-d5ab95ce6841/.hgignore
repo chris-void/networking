@@ -1,0 +1,17 @@
+syntax: glob
+
+# temporary files
+\#*\#
+*~
+
+# compiled python files
+*.pyc
+
+# ignore output files
+*.out
+*.png
+output/
+results/
+
+# ignore virtualenv environment
+env*/

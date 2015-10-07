@@ -1,0 +1,3 @@
+* use decorators around enqueue and dequeue to monitor queue lengths?
+* split up plotting among a pool of processes in plot.py
+* start observing latency after some amount of time
