@@ -118,7 +118,6 @@ def main(host, port):
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         #logging.critical('Must specify port on which to run the server.'
-                         ' For example:')
         #logging.critical('    ./server.py <portnumber>')
         sys.exit(1)
     if len(sys.argv) >= 3 and sys.argv[2] == 'debug':
