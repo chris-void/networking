@@ -1,4 +1,9 @@
-
+#!/usr/bin/env python3
+#
+# client.py - runs the experiments
+#
+# Shuwen Sun
+# Oct 2015
 
 import socket
 import configparser
@@ -6,18 +11,28 @@ import os
 import sys
 from datetime import datetime
 
-HOST = '128.197.11.36'
-PORT = 58909  # test port
-RECEIVE_BYTES = 4096
-
-
+from config import HOST
+from config import PORT
+from config import RECEIVE_BYTES
 from config import NUM_PROBES
 from config import NUM_TRIALS
 from config import SERVER_DELAYS
 from config import MEASUREMENTS
 
+class ServerException(Exception):
+    """
+    exception for client connct server
+    """
+    def __init__(self, message):
+        self.message = message
+
+    def __str__(self):
+        return repr(self.message)
 
 class Statistics(object):
+    """
+    use send time, recv time and msg size to calculate rtt and tput
+    """
     def __init__(self, send_time, recv_time, message_size):
         self.send_time = send_time
         self.recv_time = recv_time
@@ -31,7 +46,11 @@ class Statistics(object):
 
 
 
-class Experiment(object):
+class ClientProcess(object):
+    """
+    client process
+    implement the function in 3 phases
+    """
     def __init__(self, host, port, measurement_type, num_probes, message_size, delay):
         self.host, self.port = host, port
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -101,7 +120,7 @@ def main(host, port):
             for s in sizes:
                 results[d][m][s] = {}
                 for n in range(NUM_TRIALS):
-                    with Experiment(host, int(port), m, NUM_PROBES, s, d) as e:
+                    with ClientProcess(host, int(port), m, NUM_PROBES, s, d) as e:
                         e.run()
                         if m == 'rtt':
                             data = [x.round_trip_time() for x in e.stats]

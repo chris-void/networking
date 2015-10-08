@@ -1,4 +1,9 @@
-
+#!/usr/bin/env python3
+#
+# server.py - runs the experiments
+#
+# Shuwen Sun
+# Oct 2015
 
 import socket
 import socketserver
@@ -16,7 +21,7 @@ ERR_MEASURE = 'Invalid Measurement Message'
 
 
 class MeasurementProtocolHandler(socketserver.StreamRequestHandler):
-    def handle_setup(self, measurement_type, num_probes, message_size, delay):
+    def handler_setup(self, measurement_type, num_probes, message_size, delay):
         try:
             self.num_expected_messages = int(num_probes)
             self.message_size = int(message_size)
@@ -33,7 +38,7 @@ class MeasurementProtocolHandler(socketserver.StreamRequestHandler):
         self.current_sequence_num = 1
         self.respond_ok('Ready')
 
-    def handle_measurement(self, sequence_num, payload):
+    def handler_measurement(self, sequence_num, payload):
         if int(sequence_num) > self.num_expected_messages:
             self.respond_error(ERR_MEASURE)
             self.still_processing = False
@@ -56,7 +61,7 @@ class MeasurementProtocolHandler(socketserver.StreamRequestHandler):
     def respond_error(self, message):
         self.wfile.write('404 ERROR: {0}'.format(message).encode('UTF-8'))
 
-    def handle(self):
+    def handler(self):
         # sent from the client.
         self.still_processing = True
         while self.still_processing:
@@ -70,12 +75,12 @@ class MeasurementProtocolHandler(socketserver.StreamRequestHandler):
                 if len(incoming[1:]) != 4:
                     self.respond_error(ERR_SETUP)
                     break
-                self.handle_setup(*incoming[1:])
+                self.handler_setup(*incoming[1:])
             elif phase == 'm':
                 if len(incoming[1:]) != 2:
                     self.respond_error(ERR_MEASURE)
                     break
-                self.handle_measurement(*incoming[1:])
+                self.handler_measurement(*incoming[1:])
             elif phase == 't':
                 if len(incoming) > 1:
                     self.respond_error(ERR_TERM)
@@ -91,6 +96,5 @@ def main(host, port):
     server = socketserver.TCPServer((host, port), MeasurementProtocolHandler)
     server.serve_forever()
     
-
 if __name__ == "__main__":
     main(socket.getfqdn(), int(sys.argv[1]))
