@@ -116,10 +116,10 @@ def main(host, port):
     
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
+    #if len(sys.argv) < 2:
         #logging.critical('Must specify port on which to run the server.'
         #logging.critical('    ./server.py <portnumber>')
-        sys.exit(1)
-    if len(sys.argv) >= 3 and sys.argv[2] == 'debug':
+     #   sys.exit(1)
+    #if len(sys.argv) >= 3 and sys.argv[2] == 'debug':
         #logging.basicConfig(level=logging.DEBUG)
     main(socket.getfqdn(), int(sys.argv[1]))
