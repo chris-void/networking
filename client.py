@@ -127,10 +127,11 @@ def main(host, port):
                         else:
                             data = [x.throughput() for x in e.stats]
                         results[d][m][s][n] = data
-    write_results(results)
+    f = open('data_filefile', 'w')
+    write_results(results,f)
+    
 
-
-def write_results(results, f=sys.stdout):
+def write_results(results, f):#=sys.stdout):
     f.write('# written at {}\n'.format(datetime.now().isoformat()))
     f.write('# delay measurement_type msg_size trial_num probe_num value\n')
     for delay in SERVER_DELAYS:
@@ -144,7 +145,7 @@ def write_results(results, f=sys.stdout):
                                 .format(delay, m, size, trial_num, probe_num,
                                         values[probe_num]))
                         f.write('\n')
-
+    f.close()
 
 if __name__ == '__main__':
     main(HOST, PORT)
